@@ -14,9 +14,11 @@ app.use(express.json());
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
-  "https://zootrackbackend.onrender.com", // backend (optional)
-  "https://zoo-track-frontend.vercel.app" 
+  "https://zootrackbackend.onrender.com",
+  "https://zoo-track-frontend.vercel.app",
+  "https://zoo-track-frontend-35vz7d82p-minakshikr7s-projects.vercel.app" // ✅ Add this line
 ];
+
 
 app.use(cors({
   origin: function (origin, callback) {
