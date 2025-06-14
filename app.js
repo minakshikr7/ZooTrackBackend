@@ -10,11 +10,26 @@ const app = express();
 app.use(cookieParser())
 connectDB();
 app.use(express.json());
- app.use(cors({
-    origin:["http://localhost:3000"],
-    methods:["GET","POST","PUT","DELETE"],
-    credentials:true,
-}))
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "https://zootrackbackend.onrender.com", // backend (optional)
+  "https://zoo-track-frontend.vercel.app" 
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like Postman) or from allowed list
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  credentials: true
+}));
 
  
 
